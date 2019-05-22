@@ -4,10 +4,13 @@ moment().format();
 var keys = require("./keys.js");
 var axios = require("axios");
 // var spotify = new Spotify(keys.spotify);
-// var search = process.argv[2];
-// Joining the remaining arguments since an actor or tv show name may contain spaces
+var search = process.argv[2];
+
 var term = process.argv.slice(3).join("+");
 // concert-this
+if(search === "concert-this"){concertThis()}
+
+function concertThis() {
 var artist = term //process.argv[2]
 var URL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
 axios.get(URL).then(function(response){
@@ -34,6 +37,8 @@ axios.get(URL).then(function(response){
       }
       console.log(error.config);
     });
+}
+if (!search) {search = "concertThis"}
 // if (!search) {search = "concert-this"}
 if (!term) {term = "foo fighters"}
 
